@@ -1,0 +1,23 @@
+flowchart TD
+    A["Inicio"] --> B("Leer datos del cliente")
+    B --> C{"Evaluando Reglas"}
+    C --> D{"Edad > 60 Y Vuelos >= 5 Y Tiene tarjeta de crédito?"}
+    D -- Sí --> E("Elegible: Descuento Aplicado")
+    D -- No --> F{"¿Evaluar siguiente regla?"}
+    F --> G{"Regla 2: Jóvenes y Destino"}
+    G -- Sí --> E
+    G -- No --> H{"¿Evaluar siguiente regla?"}
+    H --> I{"Regla 3: Frecuencia o Élite"}
+    I -- Sí --> E
+    I -- No --> J{"¿Evaluar siguiente regla?"}
+    J --> K{"Regla 4: Fidelidad o Lujo"}
+    K -- Sí --> E
+    K -- No --> L{"¿Evaluar siguiente regla?"}
+    L --> M{"Regla 5: Cumpleaños o Vacaciones"}
+    M -- Sí --> E
+    M -- No --> N("No Elegible: Sin Descuento")
+    E --> P["Fin"]
+    N --> P
+
+
+
