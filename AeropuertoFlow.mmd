@@ -1,23 +1,40 @@
-flowchart TD
-    A["Inicio"] --> B("Leer datos del cliente")
-    B --> C{"Evaluando Reglas"}
-    C --> D{"Edad > 60 Y Vuelos >= 5 Y Tiene tarjeta de crédito?"}
-    D -- Sí --> E("Elegible: Descuento Aplicado")
-    D -- No --> F{"¿Evaluar siguiente regla?"}
-    F --> G{"Regla 2: Jóvenes y Destino"}
-    G -- Sí --> E
-    G -- No --> H{"¿Evaluar siguiente regla?"}
-    H --> I{"Regla 3: Frecuencia o Élite"}
-    I -- Sí --> E
-    I -- No --> J{"¿Evaluar siguiente regla?"}
-    J --> K{"Regla 4: Fidelidad o Lujo"}
-    K -- Sí --> E
-    K -- No --> L{"¿Evaluar siguiente regla?"}
-    L --> M{"Regla 5: Cumpleaños o Vacaciones"}
-    M -- Sí --> E
-    M -- No --> N("No Elegible: Sin Descuento")
-    E --> P["Fin"]
-    N --> P
 
-
-
+flowchart LR
+    %% Diseño horizontal para mejor visualización
+    A([Inicio]) --> B[Definir variables]
+    B --> C[/Solicitar datos/]
+    
+    %% Flujo principal de reglas
+    C --> D{"R1: Edad>60<br/>Y vuelos>=5<br/>Y tarjeta?"}
+    D -->|Sí| ELEGIBLE[ELEGIBLE]
+    D -->|No| E{"R2: Edad<25<br/>Y club frecuente<br/>Y destino nacional?"}
+    
+    E -->|Sí| ELEGIBLE
+    E -->|No| F{"R3: Vuelos 10-20<br/>O miembro platino?"}
+    
+    F -->|Sí| ELEGIBLE
+    F -->|No| G{"R4: Puntos>900<br/>O primera clase?"}
+    
+    G -->|Sí| ELEGIBLE
+    G -->|No| H{"R5: Cumple este mes<br/>Y 1 vuelo<br/>O playa temporada baja?"}
+    
+    H -->|Sí| ELEGIBLE
+    H -->|No| NO_ELEGIBLE[NO ELEGIBLE]
+    
+    %% Mensajes finales
+    ELEGIBLE --> MENSAJE_SI[Cliente ELEGIBLE<br/>para descuento]
+    NO_ELEGIBLE --> MENSAJE_NO[Cliente NO elegible]
+    
+    MENSAJE_SI --> FIN([Fin])
+    MENSAJE_NO --> FIN
+    
+    %% Estilos para mejor visualización
+    classDef decision fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef success fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px
+    classDef process fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    
+    class D,E,F,G,H decision
+    class ELEGIBLE,MENSAJE_SI success
+    class NO_ELEGIBLE,MENSAJE_NO error
+    class A,B,C,FIN process
