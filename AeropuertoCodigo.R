@@ -47,8 +47,8 @@
   
   # Evaluar si cumple alguna regla
   if (cumpleRegla1 | cumpleRegla2 | cumpleRegla3 | cumpleRegla4 | cumpleRegla5) {
-    print("✅ El cliente ES ELEGIBLE para el descuento.")
+    print("El cliente ES ELEGIBLE para el descuento.")
   } else {
-    print("❌ El cliente NO es elegible para el descuento.")
+    print("El cliente NO es elegible para el descuento.")
   }
 
