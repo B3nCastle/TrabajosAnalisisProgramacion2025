@@ -25,8 +25,9 @@ TEMP_CRITICA <- 90
 
 margenes_bombas <- registros_bomba %>%
   mutate(margen_temp = temperatura_max_c - TEMP_CRITICA) %>%
-  filter(temperatura_max_c > 90, tiempo_uso_hrs > 200) %>%
+  filter(ubicacion == "Norte", tiempo_uso_hrs > 100, margen_temp > 0) %>%
   select(id_bomba, margen_temp, tiempo_uso_hrs) %>%
   arrange(desc(margen_temp))
 
 print(margenes_bombas)
+
